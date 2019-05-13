@@ -4,9 +4,11 @@ Angular is a Open Source Framework developed by Google. It is one of the most po
 
 In this workshop we are building a movie app step by step. It is a pratical entry into programmering Angular with TypeScript. Basic know how in JavaScript, HTML and CSS will help you to understand TypeScript, Templating and SCSS.
 
-## Setup
+## Developing Environment
 
 We are using [CodeSandbox](https://codesandbox.io/s/angular) for online coding our example movie app. There will be a box for every step, so you can dive in any time after loosing your code with the example one. This is a good way for practising coding.
+
+Of course you can code local on your machine using your favorite IDE and [Angular CLI](https://cli.angular.io).
 
 
 
