@@ -52,6 +52,75 @@ ng serve
 
 Open your browser on [http://localhost:4200](http://localhost:4200/).
 
+## Basics
+
+Inside the Angular project you find a bundle of folders and files. The goal is not to explain every file. We just want to dive in developing mode and only take these files, which are neccessary for us to dive into coding.
+
+
+```
+...
+src
+    app
+        app.component.css
+        app.component.html
+        app.component.spec.ts
+        app.component.ts
+        app.module.ts
+    ...
+    index.html
+    ...
+```
+
+Angular allows us to build single page applications. The file index.html is the single page. Take a look at it.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ABW Start</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
+Here we define a `<title>` we can see on the browsers tab. The body of the file is interesting. We see the `<app-root>` element in there. But if we look at the browser a different content will be displayed: A 'Welcome' message and the Angular logo. So something must be change here. Well, the `<app-root>` element is not a default html element. Instead it is one of our own components. By installing a new Angular app through CLI (or cloning this example app), Angular comes with root component. Every file in the folder `src` which starts with `app.component...` belongs to this root component.
+
+Now take a look at the file `app.component.ts`.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Angular';
+}
+```
+
+Here we find the `@Component` decorator and in there is the `selector` property, which has `app-root` as string. This is the information that Angular need to replace the `<app-root>` element from the `index.html` with the template of this component. The template of this component is in file `app.component.html`.
+
+```html
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+```
+
+This is basically what happens at the startup.
+
 
 [01]: https://stackblitz.com/github/Bloggerschmidt/abw-start/ "StackBlitz Angular beginners workshop starter app"
 [02]: images/stackblitz.com-abw-start.png "Screenshot StackBlitz Angular beginners workshop starter app"
