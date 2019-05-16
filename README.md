@@ -265,6 +265,7 @@ After refresh your app in the browser you should see the data in the console. We
 [00]: https://stackblitz.com/github/Bloggerschmidt/abw-start/ "StackBlitz Angular Beginners Workshop (ABW) Starter App"
 [01]: https://stackblitz.com/github/Bloggerschmidt/abw-s01 "ABW Movie App Version 1"
 [02]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 2"
+[03]: https://stackblitz.com/github/Bloggerschmidt/abw-s03 "ABW Movie App Version 3"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
