@@ -1,6 +1,9 @@
-[submodule "examples/abw-start"]
-	path = examples/abw-start
-	url = git@git.namics.com:alschmidt1/abw-start.git
-[submodule "examples/abw-01"]
-	path = examples/abw-01
-	url = git@git.namics.com:alschmidt1/abw-01.git
+[submodule "apps/abw-start"]
+	path = apps/abw-start
+	url = https://github.com/Bloggerschmidt/abw-start.git
+[submodule "apps/abw-s01"]
+	path = apps/abw-s01
+	url = https://github.com/Bloggerschmidt/abw-s01.git
+[submodule "apps/abw-s02"]
+	path = apps/abw-s02
+	url = https://github.com/Bloggerschmidt/abw-s02.git
