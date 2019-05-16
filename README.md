@@ -129,19 +129,24 @@ This is basically what happens at the startup.
 
 ## Practice
 
-Task: [Build a simple movie app][01].
+[Build a simple movie app][01].
+
+Tasks
 
 - [ ] Add a `title` and an `image` for one movie
 - [ ] List the movie in your template three times
 
-Hint:
+Notes
 
 - You can use [https://via.placeholder.com/240x360](https://via.placeholder.com/240x360) for the image src
 - An unsorted list `<ul>` is a good choice
+
+Hints
+
 - Take a helper array, e.g. `num = [1, 2, 3]`
 - Iterate on the list item with `*ngFor="let i of num"`
 
-Style:
+Style
 
 For a better result you can style the output in file `app.component.css`.
 
