@@ -6,13 +6,13 @@ In this workshop we are building a movie app step by step. It is a pratical entr
 
 ## Developing
 
-We are using [StackBlitz][01] for online coding our example movie app. There will be a box for every step, so you can dive in any time after loosing your code with the example one. This is a good way for practising coding. Of course you can setup a local environment.
+We are using [StackBlitz](https://stackblitz.com/) for online coding our example movie app. There will be a box for every step, so you can dive in any time after loosing your code with the example one. This is a good way for practising coding. Of course you can setup a local environment.
 
 ### StackBlitz
 
-As entry point there is [Angular starter app][01] available online under StackBlitz.
+As entry point there is [Angular Beginners Workshop (ABW) Starter App][00] available online under StackBlitz.
 
-[![StackBlitz Angular beginners workshop starter app][02]][01]
+[![StackBlitz Angular Beginners Workshop (ABW) Starter App][02]][00]
 
 Be patient! Starting a dev server under StackBlitz.com could take a while.
 
@@ -113,15 +113,58 @@ Here we find the `@Component` decorator and in there is the `selector` property,
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Welcome to {{ title }}
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="240" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 ```
 
 This is basically what happens at the startup.
 
+> Decorators are functions that modify JavaScript classes. Angular defines a number of decorators that attach specific kinds of metadata to classes, so that the system knows what those classes mean and how they should work. 
+> 
+> Source: [Angular - Architecture overview][101]
+> 
+> [Learn more about decorators on the web][102].
 
-[01]: https://stackblitz.com/github/Bloggerschmidt/abw-start/ "StackBlitz Angular beginners workshop starter app"
-[02]: images/stackblitz.com-abw-start.png "Screenshot StackBlitz Angular beginners workshop starter app"
+## Practice
 
+Task: [Build a simple movie app][01].
+
+- [ ] Add a `title` and an `image` for one movie
+- [ ] List the movie in your template three times
+
+Hint:
+
+- You can use [https://via.placeholder.com/240x360](https://via.placeholder.com/240x360) for the image src
+- An unsorted list `<ul>` is a good choice
+- Take a helper array, e.g. `num = [1, 2, 3]`
+- Iterate on the list item with `*ngFor="let i of num"`
+
+Style:
+
+For a better result you can style the output in file `app.component.css`.
+
+```css
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+```
+
+A simple reset of the unsorted list.
+
+... to be continued ...
+
+[//]: # (app links)
+[00]: https://stackblitz.com/github/Bloggerschmidt/abw-start/ "StackBlitz Angular Beginners Workshop (ABW) Starter App"
+[01]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 1"
+[02]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 2"
+
+[//]: # (reference links)
+[101]: https://angular.io/guide/architecture "Angular - Architecture overview"
+[102]: https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841 "Exploring EcmaScript Decorators"
+
+[//]: # (image links)
+[1001]: images/stackblitz.com-abw-start.png "Screenshot StackBlitz Angular beginners workshop starter app"
