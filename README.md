@@ -139,10 +139,10 @@ Tasks
 Notes
 
 - You can use [https://via.placeholder.com/240x360](https://via.placeholder.com/240x360) for the image src
-- An unsorted list `<ul>` is a good choice
 
 Hints
 
+- An unsorted list `<ul>` is a good choice
 - Take a helper array, e.g. `num = [1, 2, 3]`
 - Iterate on the list item with `*ngFor="let i of num"`
 
@@ -158,18 +158,118 @@ ul {
 }
 ```
 
-A simple reset of the unsorted list.
+A simple reset for unsorted lists.
+
+## Services
+
+For our movie app we want to get the data from extern source. themoviedb.org offers an public api, where we can fetch a json with film results. To fetch it in Angular we create a service. Services are a great way to share information between components that don't know each other.
+
+## Practice
+
+[Create a movie service][02].
+
+Tasks
+
+- [ ] Create in new file `movie.service.ts`
+- [ ] Setup the `HttpClient`
+- [ ] Subscribe to the service
+
+Notes
+
+- Use [https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH](https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH) as given api url
+
+Hints
+
+Create a new file `movie.service.ts` in folder `app` with the following basic content.
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MovieService {
+
+  constructor() { }
+}
+```
+
+Or use the cli.
+
+```console
+ng generate service movie --skipTests=true
+```
+
+If you use this command without the flag `--skipTests=true` it will generate additionally the file `movie.service.spec.ts` for testing purpose. Testing is no topic of this workshop. So we can delete or simply ignore this file if generated.
+
+### HttpClient
+
+Before you can use the `HttpClient` to get data from a specific url, you need to import the `HttpClientModule` in file `app.module.ts`. 
+
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+```
+
+Now you can inject the `HttpClient` in your `movie.service.ts`.
+
+```typescript
+import { HttpClient } from '@angular/common/http';
+```
+
+Additionally make it available in your class.
+
+```typescript
+constructor(
+  private http: HttpClient
+) { }
+```
+
+Now you can provide the data with a function for later use in you component.
+
+```typescript
+getMovies() {
+  return this.http.get('https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH');
+}
+```
+
+For a better readability you should outsource the url in a `const`.
+
+> Excursion: Angular offers environments for development and production. It is possible to have different api urls for the different modes (prod or dev). Therefore you should define the urls in the files provided for. You find them in folder `environments` in you `src` directory. After the property `production` you can define a new property `apiUrl` with the url as value. Then you `import { environment } from '../environments/environment'` in your service and define `const apiUrl = environment.apiUrl` to work with. 
+
+### Subscribe
+
+It's time to `subscribe` to the service to get the data. To do so inject your the movie service in your `app.component.ts`.
+
+```typescript
+import { MovieService } from './movie.service';
+```
+
+Inside the constructor you have access to the service. Time to code the function to subscribe to.
+
+```typescript
+constructor(
+  private movieService: MovieService
+){
+  this.movieService.getMovies()
+  .subscribe(data => {
+    console.log(data);
+  });
+}
+```
+
+After refresh your app in the browser you should see the data in the console. Well done!
 
 ... to be continued ...
 
 [//]: # (app links)
 [00]: https://stackblitz.com/github/Bloggerschmidt/abw-start/ "StackBlitz Angular Beginners Workshop (ABW) Starter App"
-[01]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 1"
+[01]: https://stackblitz.com/github/Bloggerschmidt/abw-s01 "ABW Movie App Version 1"
 [02]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 2"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
 [102]: https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841 "Exploring EcmaScript Decorators"
+[103]: https://angular.io/guide/observables "Angular Official Documentation - Observables"
 
 [//]: # (image links)
 [1001]: images/stackblitz.com-abw-start.png "Screenshot StackBlitz Angular beginners workshop starter app"
