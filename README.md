@@ -160,9 +160,9 @@ ul {
 
 A simple reset for unsorted lists.
 
-## Services
+## Service
 
-For our movie app we want to get the data from extern source. themoviedb.org offers an public api, where we can fetch a json with film results. To fetch it in Angular we create a service. Services are a great way to share information between components that don't know each other.
+For our movie app we want to get data from an extern source. themoviedb.org offers an public api, where we can fetch a json with film results. To fetch it in Angular we create a service. Services are a great way to share information between components that don't know each other.
 
 ## Practice
 
@@ -194,7 +194,7 @@ export class MovieService {
 }
 ```
 
-Or use the cli.
+Or use the cli if you work local.
 
 ```console
 ng generate service movie --skipTests=true
@@ -224,7 +224,7 @@ constructor(
 ) { }
 ```
 
-Now you can provide the data with a function for later use in you component.
+Now you can provide a subscription of data in a function for later use in your component.
 
 ```typescript
 getMovies() {
