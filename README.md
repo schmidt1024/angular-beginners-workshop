@@ -12,7 +12,7 @@ We are using [StackBlitz](https://stackblitz.com/) for online coding our example
 
 As entry point there is [Angular Beginners Workshop (ABW) Starter App][00] available online under StackBlitz.
 
-[![StackBlitz Angular Beginners Workshop (ABW) Starter App][02]][00]
+[![StackBlitz Angular Beginners Workshop (ABW) Starter App][02]][1001]
 
 Be patient! Starting a dev server under StackBlitz.com could take a while.
 
@@ -176,11 +176,12 @@ Tasks
 
 Notes
 
-- Use [https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH](https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH) as given api url
+- Create in new file `movie.service.ts` in folder `app`
+- Use [https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH](https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH) as api url
 
 Hints
 
-Create a new file `movie.service.ts` in folder `app` with the following basic content.
+Add the file `movie.service.ts` with the following basic content.
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -232,7 +233,7 @@ getMovies() {
 }
 ```
 
-For a better readability you should outsource the url in a `const`.
+For a better readability you should outsource the api url in a `const`.
 
 > Excursion: Angular offers environments for development and production. It is possible to have different api urls for the different modes (prod or dev). Therefore you should define the urls in the files provided for. You find them in folder `environments` in you `src` directory. After the property `production` you can define a new property `apiUrl` with the url as value. Then you `import { environment } from '../environments/environment'` in your service and define `const apiUrl = environment.apiUrl` to work with. 
 
@@ -259,6 +260,46 @@ constructor(
 
 After refresh your app in the browser you should see the data in the console. Well done!
 
+## Templating
+
+We see the data in console. Let's bring it to view. Like we've heard it before we bring data from the controller to the template through interpolation. That means that everthing in double curly braces `{{ ... }}` will be rendered as text. With this text we can do something like display the movie title or add the source url for an image. 
+
+```html
+<h2>{{ title }}</h2>
+```
+
+The text between the braces is a template expression that Angular first evaluates and then converts to a string. 
+
+```html
+<img src="{{path + image}}" ... />
+```
+
+With this in mind let's bring up the data into the template.
+
+## Practice
+
+[Display title and image of each movie.][02].
+
+Tasks
+
+- [ ] Write the data results in an array, e.g. `movies: []`
+- [ ] Build the correct image url
+
+Notes
+
+- To build the image src take [https://image.tmdb.org/t/p/original/](https://image.tmdb.org/t/p/original/)
+
+Hint
+
+- In the subscription take a helper like `const query: any = data;`
+- In the subscription fetch it like `this.movies = query.results;`
+- You may replace the value of `imageSrc` with the url (see above)
+- Build the image src `src="{{imageSrc + movie.poster_path}}"`
+
+## Final app
+
+[Final movie app.][04].
+
 ... to be continued ...
 
 [//]: # (app links)
@@ -266,6 +307,7 @@ After refresh your app in the browser you should see the data in the console. We
 [01]: https://stackblitz.com/github/Bloggerschmidt/abw-s01 "ABW Movie App Version 1"
 [02]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 2"
 [03]: https://stackblitz.com/github/Bloggerschmidt/abw-s03 "ABW Movie App Version 3"
+[04]: https://stackblitz.com/github/Bloggerschmidt/abw-s04 "ABW Movie App Version 4"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
