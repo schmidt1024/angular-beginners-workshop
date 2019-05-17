@@ -287,7 +287,7 @@ Tasks
 
 Notes
 
-- To build the image src take [https://image.tmdb.org/t/p/original/](https://image.tmdb.org/t/p/original/)
+- For building the image src take [https://image.tmdb.org/t/p/original/](https://image.tmdb.org/t/p/original/)
 
 Hint
 
