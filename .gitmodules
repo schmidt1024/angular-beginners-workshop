@@ -16,3 +16,6 @@
 [submodule "apps/abw-s05"]
 	path = apps/abw-s05
 	url = https://github.com/Bloggerschmidt/abw-s05.git
+[submodule "apps/abw-s06"]
+	path = apps/abw-s06
+	url = https://github.com/Bloggerschmidt/abw-s06.git
