@@ -301,7 +301,7 @@ Hint
 With event binding we can listen to events like clicks, touches, mouse movements and keystrokes. Following event binding listens to the `(click)` event of a button and call the `onSave()` method of the component.
 
 ```html
-<button (click)="onSave()">Save</button>
+<button (click)="onSave()">Click</button>
 ```
 
 `(click)` = target event name
@@ -328,9 +328,77 @@ h2 {
 }
 ```
 
+## $event and event handling
+
+In an event binding, Angular sets up an event handler for the target event. The target event determines the shape of the $event object. For example we use the following `<input>` element (between image and button).
+
+```html
+<p>
+    <input 
+      [value]="movie.title"
+      (input)="movie.title=$event.target.value" 
+    >
+</p>
+```
+
+With this example we bind the input `value` with the `movie.title` and listen to changes of the `input` event. From there the property `movie.title` follows the path of `$event.target.value`.
+
+## Stopping propagation
+
+An event on an element in the template will be propagated to it's parent elements unless we will stop it.
+
+```html
+<html>
+  <body>
+    <section>
+      <...>
+        <button (click)="..." ... >
+```
+
+We can stop the propagation by calling the `stopPropagation()` method of an event. Consider following example in your template.
+
+```html
+<button (click)="clickIt()">
+  <span (click)="clickIt($event)">
+    Foo
+  </span>
+</button>
+<button (click)="clickIt()">
+  <span (click)="clickIt()">
+    Bar
+  </span>
+</button>
+```
+
+Both buttons `Foo` and `Bar` are nested with a `<span>` element, which has the same click event like the parent. So if you click the span you click the button and trigger two click events with one mouse click. To stop this the span of the first button gets the `$event` within the `clickIt()` method.
+
+```typescript
+clickIt(event?: MouseEvent) {
+  const message = event ? 'Propagation stopped!' : 'With propagation :-|';
+  alert('Click!' + message);
+  if (event) { event.stopPropagation(); }
+}
+```
+
+Well, our `clickIt()` method takes an `event` parameter (as `MouseEvent`). If this is true, we display a `message` `Click! Propagation stopped!` and call the `stopPropagation()` method. Usually you do this at the end of your event handler.
+
+## Practice 
+
+[Add an `input` and `click` event.][05]
+
+Tasks 
+
+- [ ] Add the `<input>` example from above to you template
+- [ ] Add a `<button>` with a `clickIt()` method
+- [ ] Nest the `clickIt()` method inside the button with an `<span>` element
+
+Hints
+
+- Take the examples from above
+
 ## Final app
 
-[Final movie app.][05].
+[Final movie app.][06].
 
 ... to be continued ...
 
@@ -341,6 +409,7 @@ h2 {
 [03]: https://stackblitz.com/github/Bloggerschmidt/abw-s03 "ABW Movie App Version 3"
 [04]: https://stackblitz.com/github/Bloggerschmidt/abw-s04 "ABW Movie App Version 4"
 [05]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 5"
+[06]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 6"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
