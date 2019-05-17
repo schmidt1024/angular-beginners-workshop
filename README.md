@@ -129,7 +129,7 @@ This is basically what happens at the startup.
 
 ## Practice
 
-[Build a simple movie app][01].
+[Build a simple movie app.][01]
 
 Tasks
 
@@ -166,7 +166,7 @@ For our movie app we want to get data from an extern source. themoviedb.org offe
 
 ## Practice
 
-[Create a movie service][02].
+[Create a movie service.][02]
 
 Tasks
 
@@ -278,7 +278,7 @@ With this in mind let's bring up the data into the template.
 
 ## Practice
 
-[Display title and image of each movie.][02].
+[Display title and image of each movie.][02]
 
 Tasks
 
@@ -291,14 +291,46 @@ Notes
 
 Hint
 
-- In the subscription take a helper like `const query: any = data;`
-- In the subscription fetch it like `this.movies = query.results;`
+- In `subsribe` take a helper like `const query: any = data;`
+- In `subsribe` fetch it like `this.movies = query.results;`
 - You may replace the value of `imageSrc` with the url (see above)
 - Build the image src `src="{{imageSrc + movie.poster_path}}"`
 
+## Event binding
+
+With event binding we can listen to events like clicks, touches, mouse movements and keystrokes. Following event binding listens to the `(click)` event of a button and call the `onSave()` method of the component.
+
+```html
+<button (click)="onSave()">Save</button>
+```
+
+`(click)` = target event name
+`onSave()` = template statement
+
+## Practice
+
+[Create a click event to show the movie title in an alert.][04]
+
+Tasks
+
+- [ ] Code a button in the template with a `(click)` event
+- [ ] Transmit the title in the template statement
+- [ ] Create an `onClick()` method in your component to catch the title
+- [ ] `alert()` the movie title
+
+Hints
+
+For a better reading you can adjust the margin of the headline in `app.component.css`.
+
+```css
+h2 {
+    margin-top: 120px;
+}
+```
+
 ## Final app
 
-[Final movie app.][04].
+[Final movie app.][05].
 
 ... to be continued ...
 
@@ -308,6 +340,7 @@ Hint
 [02]: https://stackblitz.com/github/Bloggerschmidt/abw-s02 "ABW Movie App Version 2"
 [03]: https://stackblitz.com/github/Bloggerschmidt/abw-s03 "ABW Movie App Version 3"
 [04]: https://stackblitz.com/github/Bloggerschmidt/abw-s04 "ABW Movie App Version 4"
+[05]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 5"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
