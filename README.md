@@ -409,7 +409,7 @@ Hints
 [03]: https://stackblitz.com/github/Bloggerschmidt/abw-s03 "ABW Movie App Version 3"
 [04]: https://stackblitz.com/github/Bloggerschmidt/abw-s04 "ABW Movie App Version 4"
 [05]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 5"
-[06]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 6"
+[06]: https://stackblitz.com/github/Bloggerschmidt/abw-s06 "ABW Movie App Version 6"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
