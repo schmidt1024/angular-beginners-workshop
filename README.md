@@ -74,6 +74,7 @@ src
 Angular allows us to build single page applications. The file index.html is the single page. Take a look at it.
 
 ```html
+<!-- index.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -95,6 +96,7 @@ Here we define a `<title>` we can see on the browsers tab. The body of the file 
 Now take a look at the file `app.component.ts`.
 
 ```typescript
+// app.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -110,7 +112,7 @@ export class AppComponent {
 Here we find the `@Component` decorator and in there is the `selector` property, which has `app-root` as string. This is the information that Angular need to replace the `<app-root>` element from the `index.html` with the template of this component. The template of this component is in file `app.component.html`.
 
 ```html
-<!--The content below is only a placeholder and can be replaced.-->
+<!-- app.component.html -->
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}
@@ -151,6 +153,7 @@ Style
 For a better result you can style the output in file `app.component.css`.
 
 ```css
+/* app.component.css */
 ul {
     list-style: none;
     margin: 0;
@@ -184,6 +187,7 @@ Hints
 Add the file `movie.service.ts` with the following basic content.
 
 ```typescript
+// movie.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -208,18 +212,21 @@ If you use this command without the flag `--skipTests=true` it will generate add
 Before you can use the `HttpClient` to get data from a specific url, you need to import the `HttpClientModule` in file `app.module.ts`. 
 
 ```typescript
+// app.module.ts
 import { HttpClientModule } from '@angular/common/http';
 ```
 
-Now you can inject the `HttpClient` in your `movie.service.ts`.
+Now inject the `HttpClient` in your `movie.service.ts`.
 
 ```typescript
+// movie.service.ts
 import { HttpClient } from '@angular/common/http';
 ```
 
 Additionally make it available in your class.
 
 ```typescript
+// movie.service.ts
 constructor(
   private http: HttpClient
 ) { }
@@ -228,6 +235,7 @@ constructor(
 Now you can provide a subscription of data in a function for later use in your component.
 
 ```typescript
+// movie.service.ts
 getMovies() {
   return this.http.get('https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH');
 }
@@ -242,12 +250,14 @@ For a better readability you should outsource the api url in a `const`.
 It's time to `subscribe` to the service to get the data. To do so inject your the movie service in your `app.component.ts`.
 
 ```typescript
+// app.component.ts
 import { MovieService } from './movie.service';
 ```
 
 Inside the constructor you have access to the service. Time to code the function to subscribe to.
 
 ```typescript
+// app.component.ts
 constructor(
   private movieService: MovieService
 ){
@@ -323,6 +333,7 @@ Hints
 For a better reading you can adjust the margin of the headline in `app.component.css`.
 
 ```css
+/* app.component.css */
 h2 {
     margin-top: 120px;
 }
@@ -333,6 +344,7 @@ h2 {
 In an event binding, Angular sets up an event handler for the target event. The target event determines the shape of the $event object. For example we use the following `<input>` element (between image and button).
 
 ```html
+<!-- app.component.html -->
 <p>
     <input 
       [value]="movie.title"
@@ -358,6 +370,7 @@ An event on an element in the template will be propagated to it's parent element
 We can stop the propagation by calling the `stopPropagation()` method of an event. Consider following example in your template.
 
 ```html
+<!-- app.component.html -->
 <button (click)="clickIt()">
   <span (click)="clickIt($event)">
     Foo
@@ -373,6 +386,7 @@ We can stop the propagation by calling the `stopPropagation()` method of an even
 Both buttons `Foo` and `Bar` are nested with a `<span>` element, which has the same click event like the parent. So if you click the span you click the button and trigger two click events with one mouse click. To stop this the span of the first button gets the `$event` within the `clickIt()` method.
 
 ```typescript
+// app.component.ts
 clickIt(event?: MouseEvent) {
   const message = event ? 'Propagation stopped!' : 'With propagation :-|';
   alert('Click!' + message);
@@ -396,9 +410,133 @@ Hints
 
 - Take the examples from above
 
+## @Input
+
+By building a complex app it is necassary from time to time to pass informations between components. In Angular we can pass data from parent to child with input binding.
+
+## Practice
+
+[Build a movie detail component and display the movie overview.][04]
+
+Tasks 
+
+- [ ] Generate a interface `movie.ts` and declare `title`, `poster_path` and `overview` as `string`
+- [ ] Generate a movie detail component:
+  * `movie-detail.component.html`
+  * `movie-detail.component.css`
+  * `movie-detail.component.ts`
+- [ ] Import and declare it in `app.modules.ts`
+- [ ] Input the movie data in `.ts`
+- [ ] Code the overview template in `.html`
+- [ ] Style the template in `.css`
+- [ ] At least bring the detail into the main template
+
+Notes
+
+You can generate a new interface on cli. Go to the `app` directory of your project and do the following command.
+
+```console
+ng generate interface movie
+```
+
+This will create a file `movie.ts`, which you can create by hand with the following basic content, if no cli is available.
+
+```typescript
+// movie.ts
+export interface Movie {
+  // title: string;
+}
+```
+
+You can generate a new component on cli, too.
+
+```console
+ng g component movie-detail
+```
+(`g` is short for `generate`) Or by hand you should create an new folder `movie-detail` in `app` directory and in there three files: `.ts`, `.html` and `.css` with the name `movie-detail.component` as prefix. To make you app familiar with the new component you should import and declare it in `app.modules.ts`. (Now you got an idea of how good cli is.)
+
+```typescript
+// app.modules.ts
+...
+import { MovieDetailComponent } from './movie-detail/movie-detail.component'; // << add this line
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MovieDetailComponent // << add this line
+  ],
+...
+```
+
+If you have used the cli for generating the component comes with following basic code.
+
+```typescript
+// movie-detail.component.ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-movie-detail',
+  templateUrl: './movie-detail.component.html',
+  styleUrls: ['./movie-detail.component.css']
+})
+export class MovieDetailComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+In this file you should import the movie interface and initialize it.
+
+```typescript
+// movie-detail.component.ts
+...
+import { Movie } from '../movie'; // << add this line
+...
+export class MovieDetailComponent {
+  @Input() movie: Movie; // << add this line
+}
+```
+
+How your template could look like.
+
+```html
+<!-- movie-detail.component.html -->
+<div class="detail">
+  <p>Overview: {{ movie.overview }}</p>
+</div>
+```
+
+For a better reading on desktops fit the width of detail in css.
+
+```css
+/* movie-detail.component.css  */
+@media only screen and (min-width: 768px) {
+    .detail {
+        width: 50vw;
+        margin: 0 auto;
+    }
+}
+```
+
+Finally you are able to display the movie overview in your main template.
+
+```html
+<!-- app.component.html -->
+<li *ngFor="let movie of movies">
+  ...
+  <app-movie-detail [movie]="movie"></app-movie-detail>
+</li>
+```
+
+Maybe at this point you think Angular is a little bit to much for just displaying the overview, but the benefit comes on a larger scale and when it comes to testing (not topic of this workshop).
+
 ## Final app
 
-[Final movie app.][06].
+[Final movie app.][07].
 
 ... to be continued ...
 
@@ -410,6 +548,7 @@ Hints
 [04]: https://stackblitz.com/github/Bloggerschmidt/abw-s04 "ABW Movie App Version 4"
 [05]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 5"
 [06]: https://stackblitz.com/github/Bloggerschmidt/abw-s06 "ABW Movie App Version 6"
+[07]: https://stackblitz.com/github/Bloggerschmidt/abw-s07 "ABW Movie App Version 7"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
