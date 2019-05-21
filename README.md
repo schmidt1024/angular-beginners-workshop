@@ -10,8 +10,6 @@ In this workshop you are building a movie app step by step. It is a pratical ent
 - [Basics](#basics)
 - [Dependency Injection](#dependency-injection)
 - [Services](#services)
-  * [HttpClient](#httpclient)
-  * [Subscribe](#subscribe)
 - [Templating](#templating)
 - [Event binding](#event-binding)
 - [$event and event handling](#event-and-event-handling)
