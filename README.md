@@ -2,7 +2,7 @@
 
 Angular is a Open Source Framework developed by Google. It is one of the most popular JavaScript Frameworks. Its best use for complex components or whole applications and very well documented. You can convince yourself and read [the official documentation of Angular](https://angular.io/docs) and start with [the Hero tutorial](https://angular.io/tutorial).
 
-In this workshop you are building a movie app step by step. It is a pratical entry into programmering Angular with TypeScript. Basic know how in JavaScript, HTML and CSS will help you to understand TypeScript, Templating and SCSS.
+In this workshop you are building a movie app step by step. It is a pratical entry into programmering Angular with TypeScript. Basic know how in JavaScript, HTML and CSS will help you to understand TypeScript and Templating.
 
 ## Content
 
