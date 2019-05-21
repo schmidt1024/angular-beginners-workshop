@@ -412,7 +412,7 @@ Hints
 
 ## @Input
 
-By building a complex app it is necassary from time to time to pass informations between components. In Angular we can pass data from parent to child with input binding.
+By building a complex app it is necassary from time to time to pass informations between components. In Angular we can pass data from parent to child with input binding. We will use the @Input decorator for this.
 
 ## Practice
 
@@ -428,8 +428,8 @@ Tasks
 - [ ] Import and declare it in `app.modules.ts`
 - [ ] Input the movie data in `.ts`
 - [ ] Code the overview template in `.html`
+- [ ] Bring the detail into the main template
 - [ ] Style the template in `.css`
-- [ ] At least bring the detail into the main template
 
 Notes
 
@@ -453,7 +453,7 @@ You can generate a new component on cli, too.
 ```console
 ng g component movie-detail
 ```
-(`g` is short for `generate`) Or by hand you should create an new folder `movie-detail` in `app` directory and in there three files: `.ts`, `.html` and `.css` with the name `movie-detail.component` as prefix. To make you app familiar with the new component you should import and declare it in `app.modules.ts`. (Now you got an idea of how good cli is.)
+(`g` is short for `generate`) Or by hand you should create an new folder `movie-detail` in `app` directory and in there three files: `.ts`, `.html` and `.css` with the name `movie-detail.component` as prefix. To make your app familiar with the new component you should import and declare it in `app.modules.ts`. (Now you got an idea of how good cli is.)
 
 ```typescript
 // app.modules.ts
@@ -468,7 +468,7 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component'; //
 ...
 ```
 
-If you have used the cli for generating the component comes with following basic code.
+If you have used the cli for generating the component it comes with following basic setup.
 
 ```typescript
 // movie-detail.component.ts
@@ -501,7 +501,7 @@ export class MovieDetailComponent {
 }
 ```
 
-How your template could look like.
+This is how your template could look like.
 
 ```html
 <!-- movie-detail.component.html -->
@@ -510,19 +510,7 @@ How your template could look like.
 </div>
 ```
 
-For a better reading on desktops fit the width of detail in css.
-
-```css
-/* movie-detail.component.css  */
-@media only screen and (min-width: 768px) {
-    .detail {
-        width: 50vw;
-        margin: 0 auto;
-    }
-}
-```
-
-Finally you are able to display the movie overview in your main template.
+Then you are able to display the movie overview in your main template.
 
 ```html
 <!-- app.component.html -->
@@ -532,11 +520,114 @@ Finally you are able to display the movie overview in your main template.
 </li>
 ```
 
-Maybe at this point you think Angular is a little bit to much for just displaying the overview, but the benefit comes on a larger scale and when it comes to testing (not topic of this workshop).
+For a better reading on desktops fit the width of a list item (parent item) in css.
+
+```css
+/* app.component.css  */
+@media only screen and (min-width: 768px) {
+    li {
+        width: 50vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+```
+
+Maybe at this point you think Angular is a little bit to much for just displaying the overview. In this case you are right. But the benefit comes on a larger scale and when it comes to testing (no topic of this workshop).
+
+## @Output
+
+If you input some data from component to component you may want to output some data, too. As the @Input practice before Angular offers you a decorator for this: @Output.
+
+## EventEmitter
+
+Angular provides an `EventEmitter` class that is used when publishing values from a component through the @Output() decorator. EventEmitter adding an `emit()` method so it can send values.
+
+## Practice
+
+[Emit an event of your parent component to display the selected movie.][07]
+
+Tasks
+
+- [ ] Add `active: boolean` to the Movie interface `movie.ts`
+- [ ] Add a `<button>` to `movie-detail.component.html`
+- [ ] Add the method `choose()` in `movie-detail.component.ts` to activate the selected movie and to ...
+- [ ] Emit `this.movie` to the parent with `@Output` and `EventEmitter`; take `chooseRequest` as given event name
+- [ ] Prepare the parent template with `chooseRequest` event to call a method like `chooseMovie()` 
+- [ ] Write a `chooseMovie()` method with `movie` parameter to  simple `alert()` an `alertMessage` and the `movie.title`
+
+Hints
+
+- With `active: boolean` you can toggle the button text in your child component from `Deactivate` to `Activate` and vice versa. Furthermore it will be useful to take this boolean for adding css classes in the list item from your parent component.
+
+```html
+<!-- app.component.html -->
+<li ...
+[className]="movie.active ? 'active' : 'inactive'"
+>
+```
+
+- In the `[className]` you can write an expression, e.g. to toggle the classes `active` and `inactive`
+
+```html
+<!-- movie-detail.component.html -->
+<p>
+  <button (click)="choose()">
+    <span [innerHTML]="movie.active ? 'Deactivate' : 'Activate'"></span>
+  </button>
+</p>
+```
+
+- The `<button>` in `movie-detail.component.html` should come with a `(click)` event to call the new method `choose()` for example. In a `<span>` and with the `[innerHTML]` property you manipulate the button text by the `movie.active` boolean. It should be `Deactive` by default and `Activate` by clicking.
+
+```typescript
+// movie-detail.component.ts
+import { ... EventEmitter, Output } from '@angular/core';
+```
+
+- For the next steps we keep in mind that we want to pass some data from the child component to the parent. In our case it is the selected `movie` object. Furthermore we want to trigger a parent event `(chooseRequest)` with it. This event doesn't exist at this very moment but it will be come with an own method. Well, step by step. Next additionally import the `EventEmitter` and `Output` from the `core`. 
+
+```typescript
+// movie-detail.component.ts
+@Output() chooseRequest = new EventEmitter<Movie>();
+```
+
+- Your detail component can now expose an EventEmitter property. The parent binds to that event property and will react with an own method . A childs `EventEmitter` property is an `@Output` property. `chooseRequest` will be the parent event.
+
+```typescript
+// movie-detail.component.ts
+choose() {
+  this.movie.active = !this.movie.active;
+  this.chooseRequest.emit(this.movie);
+}
+```
+
+- Next you toggle `this.movie.active` property to `true`. At least in your detail component you `emit` `this.movie` to `chooseRequest`.
+
+```html
+<!-- app.component.html -->
+<app-movie-detail 
+  [movie]="movie" 
+  (chooseRequest)="chooseMovie($event)"
+>
+</app-movie-detail>
+```
+
+- Time to prepare the parent to listen to the child by adding the `(chooseRequest)` event to call the `chooseMovie()` method, which will be coded next.
+
+```typescript
+// app.component.ts
+chooseMovie(movie?: Movie) {
+  const alertMessage = movie.active ? 'Activated' : 'Deactivated';
+  alert(alertMessage + ` ${movie.title}.`);
+}
+```
+
+- The `chooseMovie()` method have `movie?: Movie` as parameter. To call a simple `alert()` you toggle an `alertMessage` and display the `movie.title`, which is be given from the child through parameter.
 
 ## Final app
 
-[Final movie app.][07].
+[Final movie app.][08].
 
 ... to be continued ...
 
@@ -549,6 +640,7 @@ Maybe at this point you think Angular is a little bit to much for just displayin
 [05]: https://stackblitz.com/github/Bloggerschmidt/abw-s05 "ABW Movie App Version 5"
 [06]: https://stackblitz.com/github/Bloggerschmidt/abw-s06 "ABW Movie App Version 6"
 [07]: https://stackblitz.com/github/Bloggerschmidt/abw-s07 "ABW Movie App Version 7"
+[08]: https://stackblitz.com/github/Bloggerschmidt/abw-s08 "ABW Movie App Version 8"
 
 [//]: # (reference links)
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
