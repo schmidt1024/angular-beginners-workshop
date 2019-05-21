@@ -321,8 +321,8 @@ Notes
 
 Hint
 
-- In `subsribe` take a helper like `const query: any = data;`
-- In `subsribe` fetch it like `this.movies = query.results;`
+- In `subsribe` declare `data: any`
+- In `subsribe` store it like `this.movies = data.results;`
 - You may replace the value of `imageSrc` with the url (see above)
 - Build the image src `src="{{imageSrc + movie.poster_path}}"`
 
