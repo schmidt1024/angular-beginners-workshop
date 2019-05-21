@@ -26,7 +26,7 @@ You are using [StackBlitz](https://stackblitz.com/) for online coding your examp
 
 As entry point there is [Angular Beginners Workshop (ABW) Starter App][00] available online under StackBlitz.
 
-[![StackBlitz Angular Beginners Workshop (ABW) Starter App][02]][1001]
+[![StackBlitz Angular Beginners Workshop (ABW) Starter App][1001]][00]
 
 Be patient! Starting a dev server under StackBlitz.com could take a while.
 
