@@ -22,3 +22,6 @@
 [submodule "apps/abw-s07"]
 	path = apps/abw-s07
 	url = https://github.com/Bloggerschmidt/abw-s07.git
+[submodule "apps/abw-s08"]
+	path = apps/abw-s08
+	url = https://github.com/Bloggerschmidt/abw-s08.git
