@@ -129,7 +129,7 @@ This is basically what happens at the startup.
 > 
 > [Learn more about decorators on the web][102].
 
-## Practice 🔥
+## 🔥Practice
 
 [Build a simple movie app.][01]
 
@@ -163,11 +163,15 @@ ul {
 
 A simple reset for unsorted lists.
 
-## Service
+## Dependency Injection
 
-For our movie app we want to get data from an extern source. themoviedb.org offers an public api, where we can fetch a json with film results. To fetch it in Angular we create a service. Services are a great way to share information between components that don't know each other.
+Dependencies are services or objects that a class needs to perform its function. Dependency Injection (DI) is a coding pattern in which a class asks for dependencies from external sources. DI make your app flexible, efficient and robust as well as testable and maintainable. Let's explain it in practice by creating a own service.
 
-## Practice 🔥
+## Services
+
+For your movie app you want to get data from an extern source. [themoviedb.org][104] offers an public api, where you can fetch a json with movie results. Fetch these with your own service. BTW: Services are a great way to share information between components that don't know each other.
+
+## 🔥Practice
 
 [Create a movie service.][02]
 
@@ -180,7 +184,7 @@ Tasks
 Notes
 
 - Create in new file `movie.service.ts` in folder `app`
-- Use [https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH](https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH) as api url
+- Use [https://api.themoviedb.org/3/movie/top_rated][104] as api url
 
 Hints
 
@@ -205,15 +209,27 @@ Or use the cli if you work local.
 ng generate service movie --skipTests=true
 ```
 
-If you use this command without the flag `--skipTests=true` it will generate additionally the file `movie.service.spec.ts` for testing purpose. Testing is no topic of this workshop. So we can delete or simply ignore this file if generated.
+If you use this command without the flag `--skipTests=true` it will generate additionally the file `movie.service.spec.ts` for testing purpose. Testing is no topic of this workshop. So you can delete or simply ignore this file if generated.
+
+Through DI you supply data to the `AppComponent` from the injectable `MovieService` class. The `@Injectable()` is an essential ingredient in every service definition. It marks it as a service that can be injected. With `providedIn: 'root'` you declare that this service should be created by the root application injector.
 
 ### HttpClient
 
-Before you can use the `HttpClient` to get data from a specific url, you need to import the `HttpClientModule` in file `app.module.ts`. 
+You can use the `HttpClient` to get data from a specific url. But before you can do this you need to import the `HttpClientModule` in file `app.module.ts`. 
 
 ```typescript
 // app.module.ts
 import { HttpClientModule } from '@angular/common/http';
+
+...
+
+@NgModule({
+  ...
+  imports: [
+    ...,
+    HttpClientModule
+  ],
+})
 ```
 
 Now inject the `HttpClient` in your `movie.service.ts`.
@@ -227,9 +243,13 @@ Additionally make it available in your class.
 
 ```typescript
 // movie.service.ts
-constructor(
-  private http: HttpClient
-) { }
+export class MovieService {
+
+  constructor(
+    private http: HttpClient
+  ) {}
+
+}
 ```
 
 Now you can provide a subscription of data in a function for later use in your component.
@@ -286,7 +306,7 @@ The text between the braces is a template expression that Angular first evaluate
 
 With this in mind let's bring up the data into the template.
 
-## Practice 🔥
+## 🔥Practice
 
 [Display title and image of each movie.][02]
 
@@ -317,7 +337,7 @@ With event binding we can listen to events like clicks, touches, mouse movements
 `(click)` = target event name
 `onSave()` = template statement
 
-## Practice 🔥
+## 🔥Practice
 
 [Create a click event to show the movie title in an alert.][04]
 
@@ -396,7 +416,7 @@ clickIt(event?: MouseEvent) {
 
 Well, our `clickIt()` method takes an `event` parameter (as `MouseEvent`). If this is true, we display a `message` `Click! Propagation stopped!` and call the `stopPropagation()` method. Usually you do this at the end of your event handler.
 
-## Practice 🔥 
+## 🔥Practice 
 
 [Add an `input` and `click` event.][05]
 
@@ -414,7 +434,7 @@ Hints
 
 By building a complex app it is necassary from time to time to pass informations between components. In Angular we can pass data from parent to child with input binding. We will use the @Input decorator for this.
 
-## Practice 🔥
+## 🔥Practice
 
 [Build a movie detail component and display the movie overview.][04]
 
@@ -543,7 +563,7 @@ If you input some data from component to component you may want to output some d
 
 Continue Angular provides an `EventEmitter` class which is used when publishing values from a component through the `@Output()` decorator. EventEmitter adding an `emit()` method so it can send values. A childs `EventEmitter` property is an `@Output` property. 
 
-## Practice 🔥
+## 🔥Practice
 
 [Emit an event of your parent component to display the selected movie from the detail component.][07]
 
@@ -643,7 +663,7 @@ li {
 
 - The toggling of the `background-color` looks better in `transition`. (You may delete an existing `h2` definition for a better result.)
 
-## Final app
+## Final app 🎉
 
 [Final movie app.][08].
 
@@ -664,6 +684,7 @@ li {
 [101]: https://angular.io/guide/architecture "Angular - Architecture overview"
 [102]: https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841 "Exploring EcmaScript Decorators"
 [103]: https://angular.io/guide/observables "Angular Official Documentation - Observables"
+[104]: https://api.themoviedb.org/3/movie/top_rated?api_key=d7fc424ee402bd0666f5f420c5201966&page=1&region=CH "api.themoviedb.org"
 
 [//]: # (image links)
 [1001]: images/stackblitz.com-abw-start.png "Screenshot StackBlitz Angular beginners workshop starter app"
