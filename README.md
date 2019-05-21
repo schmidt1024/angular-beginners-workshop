@@ -129,7 +129,7 @@ This is basically what happens at the startup.
 > 
 > [Learn more about decorators on the web][102].
 
-## Practice
+## Practice 🔥
 
 [Build a simple movie app.][01]
 
@@ -167,7 +167,7 @@ A simple reset for unsorted lists.
 
 For our movie app we want to get data from an extern source. themoviedb.org offers an public api, where we can fetch a json with film results. To fetch it in Angular we create a service. Services are a great way to share information between components that don't know each other.
 
-## Practice
+## Practice 🔥
 
 [Create a movie service.][02]
 
@@ -286,7 +286,7 @@ The text between the braces is a template expression that Angular first evaluate
 
 With this in mind let's bring up the data into the template.
 
-## Practice
+## Practice 🔥
 
 [Display title and image of each movie.][02]
 
@@ -317,7 +317,7 @@ With event binding we can listen to events like clicks, touches, mouse movements
 `(click)` = target event name
 `onSave()` = template statement
 
-## Practice
+## Practice 🔥
 
 [Create a click event to show the movie title in an alert.][04]
 
@@ -396,7 +396,7 @@ clickIt(event?: MouseEvent) {
 
 Well, our `clickIt()` method takes an `event` parameter (as `MouseEvent`). If this is true, we display a `message` `Click! Propagation stopped!` and call the `stopPropagation()` method. Usually you do this at the end of your event handler.
 
-## Practice 
+## Practice 🔥 
 
 [Add an `input` and `click` event.][05]
 
@@ -414,7 +414,7 @@ Hints
 
 By building a complex app it is necassary from time to time to pass informations between components. In Angular we can pass data from parent to child with input binding. We will use the @Input decorator for this.
 
-## Practice
+## Practice 🔥
 
 [Build a movie detail component and display the movie overview.][04]
 
@@ -537,28 +537,29 @@ Maybe at this point you think Angular is a little bit to much for just displayin
 
 ## @Output
 
-If you input some data from component to component you may want to output some data, too. As the @Input practice before Angular offers you a decorator for this: @Output.
+If you input some data from component to component you may want to output some data, too. As the `@Input` practice before Angular offers you a decorator for this: `@Output`.
 
 ## EventEmitter
 
-Angular provides an `EventEmitter` class that is used when publishing values from a component through the @Output() decorator. EventEmitter adding an `emit()` method so it can send values.
+Continue Angular provides an `EventEmitter` class which is used when publishing values from a component through the `@Output()` decorator. EventEmitter adding an `emit()` method so it can send values. A childs `EventEmitter` property is an `@Output` property. 
 
-## Practice
+## Practice 🔥
 
-[Emit an event of your parent component to display the selected movie.][07]
+[Emit an event of your parent component to display the selected movie from the detail component.][07]
 
 Tasks
 
-- [ ] Add `active: boolean` to the Movie interface `movie.ts`
-- [ ] Add a `<button>` to `movie-detail.component.html`
-- [ ] Add the method `choose()` in `movie-detail.component.ts` to activate the selected movie and to ...
+- [ ] Add `active: boolean` to the Movie interface `movie.ts` for toggling
+- [ ] Add a `<button>` to `movie-detail.component.html` to `Activate` or `Deactivate` the movie and call an `(click)` event with a `choose()` method
+- [ ] Add the method `choose()` in `movie-detail.component.ts` to toggle the selected movie and to ...
 - [ ] Emit `this.movie` to the parent with `@Output` and `EventEmitter`; take `chooseRequest` as given event name
-- [ ] Prepare the parent template with `chooseRequest` event to call a method like `chooseMovie()` 
-- [ ] Write a `chooseMovie()` method with `movie` parameter to  simple `alert()` an `alertMessage` and the `movie.title`
+- [ ] Prepare the parent template with `chooseRequest` event to call a method `chooseMovie()` 
+- [ ] Write a `chooseMovie()` method with `movie` parameter (interface `Movie`) to  simple `alert()` an `alertMessage` and the `movie.title`
+- [ ] Define the `background-color` for the `active` `li` element with CSS
 
 Hints
 
-- With `active: boolean` you can toggle the button text in your child component from `Deactivate` to `Activate` and vice versa. Furthermore it will be useful to take this boolean for adding css classes in the list item from your parent component.
+- With `active: boolean` you can toggle the button text in your child component from `Deactivate` to `Activate` and vice versa. Furthermore it will be useful to take this boolean for adding css classes in the list item of your parent component.
 
 ```html
 <!-- app.component.html -->
@@ -592,7 +593,7 @@ import { ... EventEmitter, Output } from '@angular/core';
 @Output() chooseRequest = new EventEmitter<Movie>();
 ```
 
-- Your detail component can now expose an EventEmitter property. The parent binds to that event property and will react with an own method . A childs `EventEmitter` property is an `@Output` property. `chooseRequest` will be the parent event.
+- Your detail component can now expose an EventEmitter property. The parent binds to that event property and will react with an own method . `chooseRequest` will be the parent event.
 
 ```typescript
 // movie-detail.component.ts
@@ -624,6 +625,23 @@ chooseMovie(movie?: Movie) {
 ```
 
 - The `chooseMovie()` method have `movie?: Movie` as parameter. To call a simple `alert()` you toggle an `alertMessage` and display the `movie.title`, which is be given from the child through parameter.
+
+```css
+/* app.component.css */
+li {
+    transition: background-color 0.3s ease;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+...
+
+.active {
+    background-color: lightblue;
+}
+```
+
+- The toggling of the `background-color` looks better in `transition`. (You may delete an existing `h2` definition for a better result.)
 
 ## Final app
 
